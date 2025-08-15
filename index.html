@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>I'm Sorry, My Love 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-bg: linear-gradient(135deg, #f8fafc 0%, #ffe0ec 100%);
+            --accent: #ffb6b9;
+            --accent2: #fae3d9;
+            --text-main: #333;
+            --text-accent: #ff6f91;
+            --card-bg: rgba(255,255,255,0.85);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', Arial, sans-serif;
+            background: var(--main-bg);
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .container {
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            border-radius: 32px;
+            padding: 32px 16px 24px 16px;
+            max-width: 420px;
+            width: 95vw;
+            margin: 32px 0 0 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+        .slide.active {
+            display: flex;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .heart {
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 0 auto 24px auto;
+            animation: heartbeat 1.2s infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1);}
+            20% { transform: scale(1.15);}
+            40% { transform: scale(0.95);}
+            60% { transform: scale(1.1);}
+            80% { transform: scale(0.98);}
+        }
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--text-accent);
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        p {
+            color: var(--text-main);
+            font-size: 1.15rem;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        .btn, .nav-btn {
+            background: linear-gradient(90deg, #ffb6b9 0%, #fae3d9 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255,182,185,0.15);
+            transition: background 0.3s, transform 0.2s;
+            margin: 8px 6px 0 6px;
+        }
+        .btn:hover, .nav-btn:hover {
+            background: linear-gradient(90deg, #fae3d9 0%, #ffb6b9 100%);
+            transform: scale(1.05);
+        }
+        .flowers {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .petal {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle at 60% 40%, #ffb6b9 60%, #fff0f5 100%);
+            border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+            opacity: 0.7;
+            animation: float 6s infinite linear;
+        }
+        .petal:nth-child(1) { left: 10px; animation-delay: 0s;}
+        .petal:nth-child(2) { left: 60px; animation-delay: 1.2s;}
+        .petal:nth-child(3) { left: 110px; animation-delay: 2.4s;}
+        .petal:nth-child(4) { left: 160px; animation-delay: 3.6s;}
+        .petal:nth-child(5) { left: 210px; animation-delay: 4.8s;}
+        @keyframes float {
+            0% { top: 0; opacity: 0.7;}
+            80% { opacity: 0.7;}
+            100% { top: 80px; opacity: 0;}
+        }
+        .quote {
+            font-style: italic;
+            color: #b983ff;
+            margin: 24px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        .footer {
+            margin-top: 16px;
+            color: #aaa;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+            opacity: 0.7;
+        }
+        .timeline {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: relative;
+            width: 100%;
+        }
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: #ffe0ec;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+        .timeline-item {
+            position: relative;
+            width: 80%;
+            margin: 0 auto 32px auto;
+            background: #fff8fb;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(255,182,185,0.08);
+            padding: 18px 18px 12px 18px;
+            z-index: 1;
+        }
+        .timeline-item strong {
+            color: #ff6f91;
+            font-size: 1.1em;
+        }
+        .letter {
+            background: #fff8fb;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(255,182,185,0.08);
+            padding: 22px 18px 18px 18px;
+            color: #444;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            text-align: left;
+            width: 100%;
+        }
+        .slide-nav {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px 2vw 12px 2vw;
+                max-width: 99vw;
+                min-height: 80vh;
+            }
+            .flowers { top: -30px;}
+            .timeline, .gallery, .letter { width: 100%; }
+            .timeline-item { width: 98%; }
+            .gallery img { width: 56px; height: 56px; }
+            h1 { font-size: 1.5rem;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flowers">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+        <!-- Slide 1: Heart and Apology -->
+        <div class="slide active" id="slide-1">
+            <svg class="heart" viewBox="0 0 100 100">
+                <path d="M50 80 Q20 55 20 35 Q20 15 50 25 Q80 15 80 35 Q80 55 50 80 Z"
+                            fill="#ffb6b9" stroke="#ff6f91" stroke-width="2"/>
+            </svg>
+            <p class="apology">
+                I know I fell asleep early last night and left you waiting.<br>
+                I never want to make you feel less important, because you are my everything.<br>
+                Please forgive me for my silly mistake.<br>
+                I promise to make it up to you and always cherish our moments together. 💖
+            </p>
+        </div>
+        <!-- Slide 2: Surprise Button -->
+        <div class="slide" id="slide-2">
+            <button class="btn" onclick="showLove()">Tap for a Surprise</button>
+            <div class="quote" id="quote" style="display:none;">
+                "You are the reason my heart beats a little faster and my smile grows a little wider. I love you, always."
+            </div>
+        </div>
+        <!-- Slide 3: Timeline -->
+        <div class="slide" id="slide-3">
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <strong>🌸 Our First Chat</strong><br>
+                    The day we started talking, my world became brighter. Every message from you made me smile.
+                </li>
+                <li class="timeline-item">
+                    <strong>💬 Late Night Talks</strong><br>
+                    Our endless conversations, laughter, and silly jokes are the best part of my day.
+                </li>
+                <li class="timeline-item">
+                    <strong>💞 My Favorite Memory</strong><br>
+                    Every moment with you is special, but the way you care for me is what I cherish the most.
+                </li>
+            </ul>
+        </div>
+        <!-- Slide 4: Letter -->
+        <div class="slide" id="slide-4">
+            <div class="letter">
+                <strong>My Dearest,</strong><br>
+                I want you to know how much you mean to me. Even when I make mistakes, my love for you never fades. You are my happiness, my comfort, and my best friend. Thank you for being patient with me and for loving me the way you do.<br><br>
+                <span style="color:#b983ff;">I promise to always try my best for you, to make you smile, and to never let you feel alone.</span><br>
+                <span style="float:right;">Yours forever,<br>🐢 Kachua</span>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="slide-nav">
+            <button class="nav-btn" onclick="prevSlide()">&#8592; Prev</button>
+            <button class="nav-btn" onclick="nextSlide()">Next &#8594;</button>
+        </div>
+    </div>
+    <div class="footer">
+        Made with 💗 by YOUR KACHUA for his special one(U).
+    </div>
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 4;
+        function showSlide(n) {
+            for(let i=1;i<=totalSlides;i++) {
+                document.getElementById('slide-'+i).classList.remove('active');
+            }
+            document.getElementById('slide-'+n).classList.add('active');
+        }
+        function nextSlide() {
+            if(currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+        function prevSlide() {
+            if(currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+
+        function showLove() {
+            const quote = document.getElementById('quote');
+            quote.style.display = 'block';
+            document.querySelector('.btn').innerText = '💗 Love You 💗';
+            // Add confetti effect
+            for(let i=0; i<30; i++) {
+                let conf = document.createElement('div');
+                conf.style.position = 'fixed';
+                conf.style.left = Math.random()*100 + 'vw';
+                conf.style.top = '-30px';
+                conf.style.width = '12px';
+                conf.style.height = '12px';
+                conf.style.background = `hsl(${Math.random()*360},80%,85%)`;
+                conf.style.borderRadius = '50%';
+                conf.style.opacity = 0.8;
+                conf.style.zIndex = 99;
+                conf.style.pointerEvents = 'none';
+                conf.style.transition = 'top 2.2s cubic-bezier(.23,1.32,.53,1), opacity 2.2s';
+                document.body.appendChild(conf);
+                setTimeout(() => {
+                    conf.style.top = (60 + Math.random()*30) + 'vh';
+                    conf.style.opacity = 0;
+                }, 50);
+                setTimeout(() => conf.remove(), 2300);
+            }
+        }
+    </script>
+</body>
+</html></div>
